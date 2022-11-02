@@ -1,0 +1,115 @@
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color:#fafafa;
+    box-sizing: border-box;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 69px;
+    background-color: #EC362D;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+  
+header > span {
+    font-weight: 700;
+    font-size: 37px;
+    line-height: 43px;
+    color: #FFFFFF;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main span {
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 27px;
+    margin: 71px 0 30px 0;
+}
+
+main section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 81px;
+}
+
+main .asks {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.asks div {
+    background-color: #FFFFFF;
+    height: 74px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+}
+
+.asks div span {
+   margin: 0;
+   margin-left: 20px;
+   display: flex;
+   align-items: center;
+   height: 100%;
+}
+
+.asks div ion-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 25px;
+    cursor: pointer;
+}
+
+/*
+section input {
+    height: 46px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+    width: 90%;
+}
+
+section input::placeholder {
+    font-style: italic;
+    font-size: 19px;
+    line-height: 22px;
+    color: #BABABA;
+    padding-left: 23px;
+}
+*/
+button {
+    width: 368px;
+    height: 54px;
+    background-color: #EC362D;
+    border: none;
+    border-radius: 15px;
+    font-size: 21px;
+    line-height: 25px;
+    text-align: center;
+    color: #FFF5F4;
+    cursor: pointer;
+}
+
+@media(min-width: 1110px) {
+    main section {
+       width: 600px; 
+    }  
+}

@@ -27,6 +27,8 @@ function validation() {
             localStorage.setItem('qntQuestions', JSON.stringify(qntQuestions.value));
             const qntLevels = document.getElementById('levels-quizz');
             localStorage.setItem('qntlevels', JSON.stringify(qntLevels.value));
+            const urlImg = document.getElementById('url-img-quizz');
+            localStorage.setItem("urlImage", JSON.stringify(urlImg.value));
             window.location.href = '../quizzCreateQuestions/index.html'
         } else {
             alert('Não foi possível gerar o quizz!')
