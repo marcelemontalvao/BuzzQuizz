@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color:#E5E5E5;
+    box-sizing: border-box;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 69px;
+    background-color: #EC362D;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+  
+header > span {
+    font-weight: 700;
+    font-size: 37px;
+    line-height: 43px;
+    color: #FFFFFF;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+main span {
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 27px;
+    margin: 71px 0 30px 0;
+}
+
+main form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 85px;
+}
+
+form section {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 9px;
+    width: 100%;
+    padding: 21px 0 ;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+}
+
+section input {
+    height: 46px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+    width: 90%;
+}
+
+section input::placeholder {
+    font-style: italic;
+    font-size: 19px;
+    line-height: 22px;
+    color: #BABABA;
+    padding-left: 23px;
+}
+
+form button {
+    width: 368px;
+    height: 54px;
+    background-color: #EC362D;
+    border: none;
+    border-radius: 15px;
+    font-size: 21px;
+    line-height: 25px;
+    text-align: center;
+    color: #FFF5F4;
+    cursor: pointer;
+}
+
+@media(min-width: 1110px) {
+    main form {
+       width: 600px; 
+    }  
+}
