@@ -8,7 +8,7 @@ function validateBasicInformation() {
     const validationTitle = title.value.length >= 20 && title.value.length <= 65;
     const urlR = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/gm;
     const validationImg = urlR.test(urlImg.value);
-    
+        
     const validationQuestions = qntQuestions.value >= 3;
     const validationLevels = qntLevels.value >=2;
     const validationTrue = validationTitle && validationImg && validationQuestions && validationLevels;
