@@ -57,3 +57,29 @@ header > span {
     color: #FFFFFF;
     position:absolute;
 }
+
+main{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 42px;
+}
+
+#questionContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.questionTitle{
+    width: 100%;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 26.95px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+#answersContainer{
+    display: flex;
+    justify-content: space-around;
+}
