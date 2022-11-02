@@ -6,13 +6,5 @@ export function getQuizzesFromServer(){
     function getQuizzesResponse(response){
         return response.data
     }
-    
     return quizzesData;
 }
-
-
-
-
-
-
-
