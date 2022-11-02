@@ -23,7 +23,10 @@ function validation() {
         e.preventDefault();
         const {validationTrue} = validateBasicInformation();
         if(validationTrue) {
-            console.log('ESTÁ CHEGANDO AQUI')
+            const qntQuestions = document.getElementById('asks-quizz');
+            localStorage.setItem('qntQuestions', JSON.stringify(qntQuestions.value));
+            const qntLevels = document.getElementById('levels-quizz');
+            localStorage.setItem('qntlevels', JSON.stringify(qntLevels.value));
             window.location.href = '../quizzCreateQuestions/index.html'
         } else {
             alert('Não foi possível gerar o quizz!')
