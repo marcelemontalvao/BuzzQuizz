@@ -1,6 +1,6 @@
 import {getQuizzesFromServer} from "../../scripts/api.js";
 let quizzData = await getQuizzesFromServer();
-//console.log(quizzData);
+console.log(quizzData);
 
 function renderQuizz(){
     const quizzImage = document.getElementById('quizzImage');
@@ -21,9 +21,8 @@ function renderQuizz(){
 
         for (let j = 0; j < quizzData[0].questions[i].answers.length; j++){
             const quizzAnswer = quizzData[0].questions[i].answers[j];
-            console.log(answersContainer);
             answersContainer.forEach(element => {
-                console.log(element);
+                
                 element.innerHTML = '';
                 element.innerHTML += ` 
                 <li id="answerImageContainer">

@@ -29,10 +29,6 @@ function validation() {
             localStorage.setItem('qntlevels', JSON.stringify(qntLevels.value));
             const urlImg = document.getElementById('url-img-quizz');
             localStorage.setItem("urlImage", JSON.stringify(urlImg.value));
-            /*const objInfos = {
-                title: ,
-                image: "https://http.cat/411.jpg",
-            }*/
             window.location.href = '../quizzCreateQuestions/index.html'
 
         } else {
