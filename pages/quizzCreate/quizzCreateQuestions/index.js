@@ -104,39 +104,39 @@ function validateAsks() {
     const validationIncorrectAnswer1 = incorrectAnswer1.value != "";
 
     const incorrectUrlAnswer1 = document.querySelector(".incorrect-url-answer-1");
-    const validationUrlIncorrectAnswer1 = urlR.test(incorrectUrlAnswer1.value);
-    console.log(incorrectUrlAnswer1);
-    console.log(incorrectUrlAnswer1.value);
+    const validationUrlIncorrectAnswer1 = incorrectUrlAnswer1.value.match(urlR);
 
     const incorrectAnswer2 = document.querySelector(".incorrect-answer-2");
     const validationIncorrectAnswer2 = incorrectAnswer2.value != "";
 
     const incorrectUrlAnswer2 = document.querySelector(".incorrect-url-answer-2");
-    console.log(incorrectUrlAnswer2)
-    console.log(incorrectUrlAnswer2.value)
-
-    const validationUrlIncorrectAnswer2 = urlR.test(incorrectUrlAnswer2.value);
+  
+    const validationUrlIncorrectAnswer2 = incorrectUrlAnswer2.value.match(urlR);
 
     const incorrectAnswer3 = document.querySelector(".incorrect-answer-3");
     const validationIncorrectAnswer3 = incorrectAnswer3.value != "";
 
     const incorrectUrlAnswer3 =  document.querySelector(".incorrect-url-answer-3");
-    console.log(incorrectUrlAnswer3)
-    console.log(incorrectUrlAnswer3.value);
+ 
+    const validationUrlIncorrectAnswer3 = incorrectUrlAnswer3.value.match(urlR);
 
-    const validationUrlIncorrectAnswer3 = urlR.test(incorrectUrlAnswer3.value);
+    let validationTrue = validationTextAsk && validationColor && validationAnswerAsk && validationImg && validationIncorrectAnswer1 && validationIncorrectAnswer2 && validationIncorrectAnswer3 && validationUrlIncorrectAnswer1 && validationUrlIncorrectAnswer2 && validationUrlIncorrectAnswer3;
 
-    const validationTrue = validationTextAsk && validationColor && validationAnswerAsk && validationImg && validationIncorrectAnswer1 &&validationIncorrectAnswer2 && validationIncorrectAnswer3 && validationUrlIncorrectAnswer1 && validationUrlIncorrectAnswer2 && validationUrlIncorrectAnswer3;
+    if(validationTextAsk && validationColor && validationAnswerAsk && validationImg && ((validationIncorrectAnswer1 && validationUrlIncorrectAnswer1) || (validationIncorrectAnswer2 && validationUrlIncorrectAnswer2) || (validationIncorrectAnswer3 && validationUrlIncorrectAnswer3))) {
+        validationTrue = true;
+    } else{
+        validationTrue = false;
+    }
 
     console.log(validationTextAsk);
     console.log(validationColor);
     console.log(validationAnswerAsk);
     console.log(validationImg);
     console.log(validationIncorrectAnswer1);
-    console.log(validationIncorrectAnswer2);
-    console.log(validationIncorrectAnswer3);
     console.log(validationUrlIncorrectAnswer1);
+    console.log(validationIncorrectAnswer2);
     console.log(validationUrlIncorrectAnswer2);
+    console.log(validationIncorrectAnswer3);
     console.log(validationUrlIncorrectAnswer3);
 
     return {validationTrue};
@@ -148,17 +148,15 @@ function validation() {
     btnToLevelsPage.addEventListener('click', ()=> { 
         const asks = document.querySelectorAll('.asks > div');
         asks.forEach(ask => {
-            const {validationTrue} = validateAsks();
-            console.log(validationTrue);  
+            let {validationTrue} = validateAsks();
+            console.log(validationTrue);
         })
-        const {validationTrue} = validateAsks();        
-        console.log(validationTrue);
+        let {validationTrue} = validateAsks();        
         if(validationTrue) {
             window.location.href = '../quizzCreateLevels/index.html';
         } else {
-            alert('Deu ruim');
-        } 
-        
+            alert('Não foi possível gerar as perguntas do quizz!')
+        }
     })
 }
 
