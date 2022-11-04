@@ -3,6 +3,7 @@ import {getQuizzesFromServer} from "../../scripts/api.js";
 let quizzData = await getQuizzesFromServer();
 let quizzQuestion = []; 
 let quizzAnswer = [];
+console.log(quizzData);
 
 
 /*Função principal - Objetivo: Renderizar as propriedades dos objetos dentro do array de quizzes*/
@@ -13,23 +14,24 @@ function renderQuizz(){
     
 
     /*Renderizar imagem e título do quizz - cabeçalho */
-    quizzImage.innerHTML +=`<img src="${quizzData[0].image}">`
-    quizzTitle.innerHTML +=`<h3>${quizzData[0].title}</h3>`
+    quizzImage.innerHTML +=`<img src="${quizzData[6].image}">`
+    quizzTitle.innerHTML +=`<h3>${quizzData[6].title}</h3>`
 
     /*Renderizar título das perguntas*/
-    for(let i = 0; i < quizzData[0].questions.length; i++){
-        quizzQuestion = quizzData[0].questions[i];
+    for(let i = 0; i < quizzData[6].questions.length; i++){
+        quizzQuestion = quizzData[6].questions[i];
         questionContainer.innerHTML += `
         <header class="questionTitle">${quizzQuestion.title}</header>
         <ul class="answersContainer"></ul>`;
+        shuffleAnswers(quizzQuestion.answers); /*Embaralhar as respostas de cada pergunta do quizz*/
     }
     /*Isso precisa ficar aqui,  haja vista que a criação da classe answersContainer só existe junto à renderização do título das perguntas*/
+    /*É o correto e ideal? não.*/
     const answersContainer = document.querySelectorAll('.answersContainer');
-
-    console.log(quizzQuestion);
 
     /*Renderizar as imagens e textos das respostas*/
     for (let i = 0; i < quizzQuestion.answers.length; i++){
+        console.log(quizzQuestion.answers);
         quizzAnswer = quizzQuestion.answers[i];
         answersContainer.forEach(element => {
             element.innerHTML += ` 
@@ -40,13 +42,15 @@ function renderQuizz(){
                 `
      });
     }
-    
+
+    /*Algoritmo de Fischer-Yates para 'embaralhar' as respostas de cada pergunta */
+    function shuffleAnswers(arr){
+        for(let i = arr.length - 1; i > 0; i--){
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
 }
-
-/* for( let i = 0; i < quizzQuestion.answers.length; i++){
-    let j = Math.floor(Math.random() * (i +1))
-    [quizzAnswer[i],quizzAnswer[j]] = [quizzAnswer[j],quizzAnswer[i]]
-} */
-
 
 renderQuizz();
