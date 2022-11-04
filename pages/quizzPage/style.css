@@ -68,6 +68,7 @@ main{
 #questionContainer{
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .questionTitle{
@@ -79,7 +80,38 @@ main{
     color: #FFFFFF;
 }
 
-#answersContainer{
+.answersContainer{
+    width: 758px;
+    height: 655px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
+    align-items: center;
+}
+
+#answerImageContainer{
+    width: 329px;
+    margin-top: 20px;
+    margin-right: 25px;
+}
+
+#answerImageContainer:nth-child(2n){
+    margin-right: 0px;
+}
+
+#answerImageContainer img{
+    display: flex;
+    width: 329px;
+    height: 175px;
+}
+
+#answerImageContainer p{
+    width: 329px;
+    display: flex;
+    flex-direction: column;
+    word-break: break-all;
+    margin: 7px 0px 7px 0px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23.44px;
 }
