@@ -68,6 +68,7 @@ main{
 #questionContainer{
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .questionTitle{
@@ -79,19 +80,17 @@ main{
     color: #FFFFFF;
 }
 
-#answersContainer{
-    display: flex;
-    justify-content: space-around;
-}
-
 .answersContainer{
-    width: 100%;
+    width: 758px;
+    height: 655px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
 }
 
 #answerImageContainer{
+    width: 329px;
     margin-top: 20px;
     margin-right: 25px;
 }
@@ -107,6 +106,10 @@ main{
 }
 
 #answerImageContainer p{
+    width: 329px;
+    display: flex;
+    flex-direction: column;
+    word-break: break-all;
     margin: 7px 0px 7px 0px;
     font-weight: 700;
     font-size: 20px;
