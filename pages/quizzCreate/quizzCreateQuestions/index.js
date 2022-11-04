@@ -1,3 +1,5 @@
+const questions = [];
+
 function createDivAsks() {
     const numberOfAsks = JSON.parse(localStorage.getItem("qntQuestions"));
 
@@ -11,7 +13,7 @@ function createDivAsks() {
         `
     }
 }
-   
+
 function openForm(icon) {
     const askDiv = icon.parentNode;
     askDiv.classList.add("ask");
@@ -84,78 +86,98 @@ function openForm(icon) {
     askDiv.appendChild(form);
 }
 
-function validateAsks() {
-
-    const textAsk = document.querySelector('.text-ask'); 
+function validateAsks(ask) {
+    const textAsk = ask.querySelector('.text-ask'); 
     const validationTextAsk = textAsk.value.length >= 20;
     
-    const backgroundColor = document.querySelector('.background-color');
+    const backgroundColor = ask.querySelector('.background-color');
     const colorR = /#(([0-9a-fA-F]{2}){3,4}|([0-9a-fA-F]){3,4})/g
     const validationColor = backgroundColor.value.match(colorR);
 
-    const answerAskInput = document.querySelector(".answerAsk");
+    const answerAskInput = ask.querySelector(".answerAsk");
     const validationAnswerAsk = answerAskInput.value != "";
 
-    const urlImgAnswer = document.querySelector(".url-answer");
+    const urlImgAnswer = ask.querySelector(".url-answer");
+    console.log(urlImgAnswer);
     const urlR = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/gm;
-    const validationImg = urlR.test(urlImgAnswer.value);
+    const validationImg = urlImgAnswer.value.match(urlR);
 
-    const incorrectAnswer1 = document.querySelector(".incorrect-answer-1");
+    const incorrectAnswer1 = ask.querySelector(".incorrect-answer-1");
     const validationIncorrectAnswer1 = incorrectAnswer1.value != "";
 
-    const incorrectUrlAnswer1 = document.querySelector(".incorrect-url-answer-1");
+    const incorrectUrlAnswer1 = ask.querySelector(".incorrect-url-answer-1");
     const validationUrlIncorrectAnswer1 = incorrectUrlAnswer1.value.match(urlR);
 
-    const incorrectAnswer2 = document.querySelector(".incorrect-answer-2");
+    const incorrectAnswer2 = ask.querySelector(".incorrect-answer-2");
     const validationIncorrectAnswer2 = incorrectAnswer2.value != "";
 
-    const incorrectUrlAnswer2 = document.querySelector(".incorrect-url-answer-2");
+    const incorrectUrlAnswer2 = ask.querySelector(".incorrect-url-answer-2");
   
     const validationUrlIncorrectAnswer2 = incorrectUrlAnswer2.value.match(urlR);
 
-    const incorrectAnswer3 = document.querySelector(".incorrect-answer-3");
+    const incorrectAnswer3 = ask.querySelector(".incorrect-answer-3");
     const validationIncorrectAnswer3 = incorrectAnswer3.value != "";
 
-    const incorrectUrlAnswer3 =  document.querySelector(".incorrect-url-answer-3");
+    const incorrectUrlAnswer3 =  ask.querySelector(".incorrect-url-answer-3");
  
     const validationUrlIncorrectAnswer3 = incorrectUrlAnswer3.value.match(urlR);
 
-    let validationTrue = validationTextAsk && validationColor && validationAnswerAsk && validationImg && validationIncorrectAnswer1 && validationIncorrectAnswer2 && validationIncorrectAnswer3 && validationUrlIncorrectAnswer1 && validationUrlIncorrectAnswer2 && validationUrlIncorrectAnswer3;
+    let validationTrue = validationTextAsk && validationColor && validationAnswerAsk && validationImg && validationIncorrectAnswer1 && validationIncorrectAnswer2 && validationIncorrectAnswer3 && validationUrlIncorrectAnswer1 && validationUrlIncorrectAnswer2 && validationUrlIncorrectAnswer3;    
 
     if(validationTextAsk && validationColor && validationAnswerAsk && validationImg && ((validationIncorrectAnswer1 && validationUrlIncorrectAnswer1) || (validationIncorrectAnswer2 && validationUrlIncorrectAnswer2) || (validationIncorrectAnswer3 && validationUrlIncorrectAnswer3))) {
         validationTrue = true;
+        let questionObject = {
+			title: textAsk.value,
+			color: backgroundColor.value,
+			answers: [
+				{
+					text: answerAskInput.value,
+					image: urlImgAnswer.value,
+					isCorrectAnswer: true
+				},
+				{
+					text: incorrectAnswer1.value,
+					image: incorrectUrlAnswer1.value,
+					isCorrectAnswer: false
+				},
+                {
+                    text: incorrectAnswer2.value,
+					image: incorrectUrlAnswer2.value,
+					isCorrectAnswer: false
+                },
+                {
+                    text: incorrectAnswer3.value,
+					image: incorrectUrlAnswer3.value,
+					isCorrectAnswer: false
+                }
+			]
+		}
+        questions.push(questionObject);
     } else{
         validationTrue = false;
     }
-
-    console.log(validationTextAsk);
-    console.log(validationColor);
-    console.log(validationAnswerAsk);
-    console.log(validationImg);
-    console.log(validationIncorrectAnswer1);
-    console.log(validationUrlIncorrectAnswer1);
-    console.log(validationIncorrectAnswer2);
-    console.log(validationUrlIncorrectAnswer2);
-    console.log(validationIncorrectAnswer3);
-    console.log(validationUrlIncorrectAnswer3);
-
     return {validationTrue};
 }
  
 function validation() {
     const btnToLevelsPage = document.getElementById('toLevelsPage');
-    
+    let validationFalse = 0;
+
     btnToLevelsPage.addEventListener('click', ()=> { 
         const asks = document.querySelectorAll('.asks > div');
         asks.forEach(ask => {
-            let {validationTrue} = validateAsks();
-            console.log(validationTrue);
-        })
-        let {validationTrue} = validateAsks();        
-        if(validationTrue) {
-            window.location.href = '../quizzCreateLevels/index.html';
-        } else {
-            alert('Não foi possível gerar as perguntas do quizz!')
+            validationFalse = 0;
+            let {validationTrue} = validateAsks(ask);
+            if(validationTrue) {
+                localStorage.setItem("questions", JSON.stringify(questions));
+                window.location.href = '../quizzCreateLevels/index.html';
+            } else {
+                validationFalse++;
+            }
+        });
+
+        if(validationFalse >= 1) {
+            alert(`Não foi possível gerar as perguntas`);
         }
     })
 }
