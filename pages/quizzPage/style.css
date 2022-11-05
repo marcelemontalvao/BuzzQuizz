@@ -89,23 +89,23 @@ main{
     align-items: center;
 }
 
-#answerImageContainer{
+.answerImageContainer{
     width: 329px;
     margin-top: 20px;
     margin-right: 25px;
 }
 
-#answerImageContainer:nth-child(2n){
+.answerImageContainer:nth-child(2n){
     margin-right: 0px;
 }
 
-#answerImageContainer img{
+.answerImageContainer img{
     display: flex;
     width: 329px;
     height: 175px;
 }
 
-#answerImageContainer p{
+.answerImageContainer p{
     width: 329px;
     display: flex;
     flex-direction: column;
@@ -114,4 +114,12 @@ main{
     font-weight: 700;
     font-size: 20px;
     line-height: 23.44px;
+}
+
+.opacity{
+    opacity: 0.3;
+}
+
+.noPointerEvents{
+    pointer-events: none;
 }
