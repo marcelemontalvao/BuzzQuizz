@@ -56,6 +56,9 @@ function renderQuizz(){
 
 renderQuizz();
 
+
+/*Comportamento das respostas */
+
 let answers = []
 answers = document.querySelectorAll('.answerImageContainer');
 
@@ -65,7 +68,7 @@ answers.forEach(element => {
         console.log(element);
         console.log(parentNode);
         let imagesFromAnswer = parentNode.querySelectorAll(".answerImage");
-        console.log(imagesFromAnswer);
+
         for(let i = 0; i < imagesFromAnswer.length; i++){
             imagesFromAnswer[i].classList.add("opacity");
         }
@@ -81,6 +84,12 @@ answers.forEach(element => {
         wrongAnswerText.forEach(element => {
             element.style.color = 'red';
         });
+        
+        const nextQuestion = parentNode.nextElementSibling;
+        console.log(nextQuestion);
+        setTimeout(() =>{
+            nextQuestion.scrollIntoView({behavior: "smooth"})
+        },2000);
     });
 });
 
