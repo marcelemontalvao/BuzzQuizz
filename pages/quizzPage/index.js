@@ -7,6 +7,7 @@ let answers = [];
 let answeredQuestions = 0;
 let correctAnswer = 0;
 let numberOfQuestions = 0;
+let correctAnswerPercentage = 0;
 
 console.log(quizzData);
 
@@ -102,11 +103,12 @@ answers.forEach(element => {
     });
 });
 
+
 /*Carregar resultados do quizz e renderizar resultados do quizz */
+let quizzResultScreen = document.getElementById('quizzResults');
 function quizzResults(){
-    let quizzResultScreen = document.getElementById('quizzResults');
     const quizzLevelObjects = quizzData[15].levels; 
-    const correctAnswerPercentage = Math.ceil((correctAnswer/numberOfQuestions)*100);
+    correctAnswerPercentage = Math.ceil((correctAnswer/numberOfQuestions)*100);
 
     for(let i = 0; i < quizzLevelObjects.length - 1 ; i++){
         const resultsTitle = quizzLevelObjects[i].title;
@@ -118,33 +120,62 @@ function quizzResults(){
 
         if(correctAnswerPercentage >= quizzLevelObjects[i].minValue && correctAnswerPercentage < quizzLevelObjects[i+1].minValue){
             quizzResultScreen.innerHTML +=`
-                <header class="resultsTitle"><span>${correctAnswerPercentage}% de acerto: ${resultsText}</span></header>
+                <header class="resultsTitle"><span>${correctAnswerPercentage}% de acerto: ${resultsTitle}</span></header>
                 <ul class="resultsContainer"> 
                     <img src="${resultsImage}" class="resultsImage">
                     <p>${resultsText}</p>
                 </ul>
-                <button class="restartQuizz" onclick="restartQuizz()">Reiniciar Quizz</button>
-                <button class="returnToHomepage" onclick="returnToHomepage()">Voltar pra home</button>
+                <button class="resetQuiz">Reiniciar Quizz</button>
+                <button class="returnHome">Voltar pra home</button>
             `
+            const restartButton = document.querySelector('.resetQuiz').addEventListener('click', restartQuizz, false);
+            const returnToHome = document.querySelector('.returnHome').addEventListener('click', returnToHomepage, false);
         }
         if(correctAnswerPercentage >= quizzLevelObjects[quizzLevelObjects.length -1].minValue){
             quizzResultScreen.innerHTML +=`
-            <header class="resultsTitle"><span>${correctAnswerPercentage}% de acerto: ${maxResultsText}</span></header>
-            <ul class="resultsContainer"> 
-                <img src="${maxResultsImage}" class="resultsImage">
-                <p>${maxResultsText}</p>
-            </ul>
-            <button class="restartQuizz" onclick="restartQuizz()">Reiniciar Quizz</button>
-            <button class="returnToHomepage" onclick="returnToHomepage()">Voltar pra home</button>
-        `
+                <header class="resultsTitle"><span>${correctAnswerPercentage}% de acerto: ${maxResultsTitle}</span></header>
+                <ul class="resultsContainer"> 
+                    <img src="${maxResultsImage}" class="resultsImage">
+                    <p>${maxResultsText}</p>
+                </ul>
+                <button class="resetQuiz">Reiniciar Quizz</button>
+                <button class="returnHome">Voltar pra home</button>
+            `
+            
+            const restartButton = document.querySelector('.resetQuiz').addEventListener('click', restartQuizz, false);
+            const returnToHome = document.querySelector('.returnHome').addEventListener('click', returnToHomepage, false);
         }
     }
 }
 
 function restartQuizz(){
-    alert("reiniciando quizz!");
+    answers.forEach(element => {
+        const parentNode = element.parentNode;
+        let imagesFromAnswer = parentNode.querySelectorAll(".answerImage");
+        for (let i = 0; i < imagesFromAnswer.length; i++) {
+            imagesFromAnswer[i].classList.remove("opacity");
+        }
+        parentNode.classList.remove("noPointerEvents");
+
+        const correctAnswerText = parentNode.querySelectorAll(".true");
+        correctAnswerText.forEach(element => {
+            element.style.color = 'black'
+        });
+
+        const wrongAnswerText = parentNode.querySelectorAll(".false");
+        wrongAnswerText.forEach(element => {
+            element.style.color = 'black';
+        });
+
+        quizzResultScreen.remove();
+
+        answeredQuestions = 0;
+        correctAnswer = 0;
+        correctAnswerPercentage = 0;
+        location.reload()
+    })
 }
 
-function returnToHomepage(){    
-    alert("Retornado para HomePage!");
+function returnToHomepage(){
+    window.location.href = "https://marcelemontalvao.github.io/BuzzQuizz/"
 }

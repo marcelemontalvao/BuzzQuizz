@@ -154,7 +154,7 @@ main{
     word-break: break-all;
 }
 
-.restartQuizz{
+.resetQuiz{
     width: 262px;
     height: 52px;
     border-radius: 15px;
@@ -169,7 +169,7 @@ main{
     cursor: pointer;
 }
 
-.returnToHomepage{
+.returnHome{
     width: 220px;
     height: 44px;
     background-color: transparent;
