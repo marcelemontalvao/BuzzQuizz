@@ -40,7 +40,7 @@ main section {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    gap: 81px;
+    gap: 51px;
 }
 
 main .asks {
@@ -138,6 +138,28 @@ button {
     text-align: center;
     color: #FFF5F4;
     cursor: pointer;
+}
+
+#toHome {
+    width: 368px;
+    font-size: 21px;
+    line-height: 25px;
+    text-align: center;
+    background-color: transparent;
+    color: #818181;
+    padding-bottom: 150px;
+}
+
+.sucess img {
+    position: relative;
+    
+}
+
+.title {
+    position: absolute;
+    bottom: 380px;
+    left: 655px;
+    color: #FFFFFF;
 }
 
 @media(min-width: 1110px) {

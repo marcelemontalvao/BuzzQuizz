@@ -2,6 +2,7 @@ const levels = [];
 
 function createDivLevels() {
     const numberOfLevels = JSON.parse(localStorage.getItem("qntlevels"));
+
     for (let i = 0; i < numberOfLevels; i++) {
         const levels = document.querySelector(".levels");
         levels.innerHTML += `
@@ -56,23 +57,34 @@ function validateLevels(level) {
     const validationDescriptionLevel = descriptionLevel.value.length >= 30;
     let validationTrue = validationTitleLevel && validationHitPercentage && validationImg && validationDescriptionLevel;
    
-    console.log(validationTrue);
+    //console.log(validationTrue);
 
     if(validationTrue) {
+        validationTrue = true;
         let levelObject = {
             title: titleLevel.value,
             image: urlImgLevel.value,
-            text:   descriptionLevel.value,
+            text:  descriptionLevel.value,
             minValue: hitPercentage.value,
         }
+      /*  console.log(titleLevel.value);
+        console.log(urlImgLevel.value);
+        console.log(descriptionLevel.value);
+        console.log(hitPercentage.value);
+        console.log(levelObject);
         levels.push(levelObject);
-    }
+        console.log(levels);*/
+        levels.push(levelObject);
 
+    } else {
+        validationTrue = false;
+    }
+/*
     console.log("Validação do Título do Nível" + validationTitleLevel);
-    console.log("Validação da % do Nível" +validationHitPercentage);
-    console.log("Validação da Imagem do Nível" +validationImg);
-    console.log("Validação da descrição do Nível" +validationDescriptionLevel);
-    
+    console.log("Validação da % do Nível" + validationHitPercentage);
+    console.log("Validação da Imagem do Nível" + validationImg);
+    console.log("Validação da descrição do Nível" + validationDescriptionLevel);
+*/
     return {validationTrue};
 }
 
@@ -82,13 +94,15 @@ function validation() {
     let count = 0;
     let validationFalse = 0
     btntoSucessPage.addEventListener('click', ()=> { 
-        const levels = document.querySelectorAll('.levels > div');
-        levels.forEach(level => {
+        const levelsArray = Array.from(document.querySelectorAll('.levels > div'));
+        levelsArray.forEach(level => {
             validationFalse = 0;
             if(level.querySelector('.hit-percentage').value == 0) {
                 count++;
             }    
-            console.log("Nível" + level)
+
+           // console.log("Nível" + level);
+
             let {validationTrue} = validateLevels(level);
             if(validationTrue) {
                 localStorage.setItem("levels", JSON.stringify(levels));
@@ -107,6 +121,7 @@ function validation() {
         if(validationFalse >= 1) {
             alert('Não foi possível gerar os níveis do quizz!');
         }
+
     })
 }
 

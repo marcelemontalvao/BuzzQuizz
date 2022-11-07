@@ -124,6 +124,18 @@ function validateAsks(ask) {
 
     let validationTrue = validationTextAsk && validationColor && validationAnswerAsk && validationImg && validationIncorrectAnswer1 && validationIncorrectAnswer2 && validationIncorrectAnswer3 && validationUrlIncorrectAnswer1 && validationUrlIncorrectAnswer2 && validationUrlIncorrectAnswer3;    
 
+    console.log('Texto da pergunta' + validationTextAsk);
+    console.log('Background Color' + validationColor);
+    console.log('Resposta Correta' + validationAnswerAsk);
+    console.log('Validação da imagem da resposta correta ' + validationImg);
+    console.log('Validação da resposta incorreta 1' + validationIncorrectAnswer1)
+    console.log('Validação da resposta incorreta 2' + validationIncorrectAnswer2)
+    console.log('Validação da resposta incorreta 3' + validationIncorrectAnswer3)
+    console.log('Validação da imagem da resposta incorreta 1 ' + validationUrlIncorrectAnswer1)
+    console.log('Validação da imagem da resposta incorreta 2 ' + validationUrlIncorrectAnswer2)
+    console.log('Validação da imagem da resposta incorreta 3 ' + validationUrlIncorrectAnswer3)
+
+
     if(validationTextAsk && validationColor && validationAnswerAsk && validationImg && ((validationIncorrectAnswer1 && validationUrlIncorrectAnswer1) || (validationIncorrectAnswer2 && validationUrlIncorrectAnswer2) || (validationIncorrectAnswer3 && validationUrlIncorrectAnswer3))) {
         validationTrue = true;
         let questionObject = {
@@ -152,6 +164,18 @@ function validateAsks(ask) {
                 }
 			]
 		}
+
+        let arrayTemp = [...questionObject.answers];
+        console.log(arrayTemp);
+        arrayTemp.forEach((answer, index) => {
+            console.log(answer);
+            if(answer.text == '' || answer.image == '') {
+                arrayTemp.splice(index, 1);  
+            }
+        });
+
+        questionObject.answers = arrayTemp;
+
         questions.push(questionObject);
     } else{
         validationTrue = false;
@@ -162,7 +186,6 @@ function validateAsks(ask) {
 function validation() {
     const btnToLevelsPage = document.getElementById('toLevelsPage');
     let validationFalse = 0;
-
     btnToLevelsPage.addEventListener('click', ()=> { 
         const asks = document.querySelectorAll('.asks > div');
         asks.forEach(ask => {
@@ -170,11 +193,12 @@ function validation() {
             let {validationTrue} = validateAsks(ask);
             if(validationTrue) {
                 localStorage.setItem("questions", JSON.stringify(questions));
-                window.location.href = '../quizzCreateLevels/index.html';
+               // window.location.href = '../quizzCreateLevels/index.html';
             } else {
                 validationFalse++;
             }
         });
+       
 
         if(validationFalse >= 1) {
             alert(`Não foi possível gerar as perguntas`);
