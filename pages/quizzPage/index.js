@@ -1,3 +1,6 @@
+
+const id = JSON.parse(localStorage.getItem('id'));
+
 /*Get quizzes do servidor e criação de variáveis */
 import { getQuizzesFromServer } from "../../scripts/api.js";
 let quizzData = await getQuizzesFromServer();
@@ -8,11 +11,11 @@ let answeredQuestions = 0;
 let correctAnswer = 0;
 let numberOfQuestions = 0;
 let correctAnswerPercentage = 0;
-const id = JSON.parse(localStorage.getItem('id'));
+
 console.log(quizzData);
 
 /*Função principal - Objetivo: Renderizar as propriedades dos objetos dentro do array de quizzes*/
-export function renderQuizz() {
+function renderQuizz() {
     const quizzImage = document.getElementById('quizzImage');
     const quizzTitle = document.getElementById('quizzTitle');
     const questionContainer = document.getElementById('questionContainer');
@@ -20,12 +23,12 @@ export function renderQuizz() {
     numberOfQuestions = quizzData[8].questions.length;
 
     /*Renderizar imagem e título do quizz - cabeçalho */
-    quizzImage.innerHTML += `<img src="${id.image}">`
-    quizzTitle.innerHTML += `<h3>${id.title}</h3>`
+    quizzImage.innerHTML += `<img src="${quizzData[15].image}">`
+    quizzTitle.innerHTML += `<h3>${quizzData[15].title}</h3>`
 
     /*Renderizar título das perguntas*/
-    for (let i = 0; i < id.questions.length; i++) {
-        quizzQuestion = id.questions[i];
+    for (let i = 0; i < quizzData[15].questions.length; i++) {
+        quizzQuestion = quizzData[15].questions[i];
         const backGroundTitleColor = quizzQuestion.color;
         questionContainer.innerHTML += `
         <header class="questionTitle" style="background-color:${backGroundTitleColor}">${quizzQuestion.title}</header>
@@ -107,7 +110,8 @@ answers.forEach(element => {
 /*Carregar resultados do quizz e renderizar resultados do quizz */
 let quizzResultScreen = document.getElementById('quizzResults');
 function quizzResults(){
-    const quizzLevelObjects = id.levels; 
+
+    const quizzLevelObjects = quizzData[15].levels; 
     correctAnswerPercentage = Math.ceil((correctAnswer/numberOfQuestions)*100);
 
     for(let i = 0; i < quizzLevelObjects.length - 1 ; i++){
