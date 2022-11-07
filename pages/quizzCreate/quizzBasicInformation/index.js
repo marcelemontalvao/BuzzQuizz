@@ -23,6 +23,8 @@ function validation() {
         e.preventDefault();
         const {validationTrue} = validateBasicInformation();
         if(validationTrue) {
+            const title = document.getElementById("quizz-title");
+            localStorage.setItem('title', JSON.stringify(title.value));
             const qntQuestions = document.getElementById('asks-quizz');
             localStorage.setItem('qntQuestions', JSON.stringify(qntQuestions.value));
             const qntLevels = document.getElementById('levels-quizz');

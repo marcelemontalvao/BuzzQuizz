@@ -1,15 +1,14 @@
 let arrayQuizzes = []
 
-
 function callingTheQuizzes(){
 const promise = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes')
 promise.then(getQuizzes)
 promise.catch(deuErro)
 }
+
 callingTheQuizzes();
 
 function getQuizzes(resposta){
-   
     
     arrayQuizzes = resposta.data
     console.log(arrayQuizzes);
@@ -27,8 +26,20 @@ function getQuizzes(resposta){
     }
 }
 
+function goToQuizzPage() {
+    const quizzPage = document.querySelectorAll('.createQuizzPage');
+
+
+    quizzPage.forEach(quizz => {
+        quizz.addEventListener("click", ()=> {
+            window.location.href = 'pages/quizzCreate/quizzBasicInformation/index.html'
+        })
+    })
+}
 
 
 function deuErro(erro){
     console.log(erro)
 } 
+
+goToQuizzPage();

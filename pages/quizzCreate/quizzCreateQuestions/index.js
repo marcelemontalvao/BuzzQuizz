@@ -165,17 +165,15 @@ function validateAsks(ask) {
 			]
 		}
 
-        let arrayTemp = [...questionObject.answers];
-        console.log(arrayTemp);
-        arrayTemp.forEach((answer, index) => {
-            console.log(answer);
-            if(answer.text == '' || answer.image == '') {
-                arrayTemp.splice(index, 1);  
-            }
-        });
+        let arrayTemp = [];
+
+        for (let i = 0; i < questionObject.answers.length; i++) {
+            if(questionObject.answers[i].text != '' && questionObject.answers[i].image != '') {
+                arrayTemp.push(questionObject.answers[i]);  
+            }   
+        }
 
         questionObject.answers = arrayTemp;
-
         questions.push(questionObject);
     } else{
         validationTrue = false;
@@ -187,19 +185,19 @@ function validation() {
     const btnToLevelsPage = document.getElementById('toLevelsPage');
     let validationFalse = 0;
     btnToLevelsPage.addEventListener('click', ()=> { 
+        
         const asks = document.querySelectorAll('.asks > div');
         asks.forEach(ask => {
             validationFalse = 0;
             let {validationTrue} = validateAsks(ask);
             if(validationTrue) {
                 localStorage.setItem("questions", JSON.stringify(questions));
-               // window.location.href = '../quizzCreateLevels/index.html';
+                window.location.href = '../quizzCreateLevels/index.html';
             } else {
                 validationFalse++;
             }
         });
        
-
         if(validationFalse >= 1) {
             alert(`Não foi possível gerar as perguntas`);
         }
